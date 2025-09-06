@@ -28,23 +28,38 @@
                                 <tr>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">#</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Name</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Permission</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Created At</th>
                                     <th class="px-4 py-2 text-center text-sm font-semibold text-gray-600">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
-                                @forelse($roles as $key => $permission)
+                                @forelse($roles as $key => $role)
                                     <tr>
                                         <td class="px-4 py-2 text-sm text-gray-700">{{ $key + 1 }}</td>
-                                        <td class="px-4 py-2 text-sm text-gray-700">{{ $permission->name }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700">{{ $role->name }}</td>
+                                     <td class="px-4 py-2 text-sm text-gray-700">
+    @if($role->permissions->isNotEmpty())
+        <div class="flex flex-wrap gap-1">
+            @foreach($role->permissions as $permission)
+                <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2 py-1 rounded-full">
+                    {{ $permission->name }}
+                </span>
+            @endforeach
+        </div>
+    @else
+        <span class="text-gray-400 text-xs">No permissions</span>
+    @endif
+</td>
+
                                         <td class="px-4 py-2 text-sm text-gray-500">
-                                            {{ $permission->created_at->format('d M, Y') }}</td>
+                                            {{ $role->created_at->format('d M, Y') }}</td>
                                         <td class="px-4 py-2 text-center space-x-2">
-                                            {{-- <a href="{{ route('permissions.edit', $permission->id) }}"
+                                            <a href="{{ route('roles.edit', $role->id) }}"
                                                 class="px-3 py-1 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700">
                                                 Edit
                                             </a>
-                                            <form action="{{ route('permissions.destroy', $permission->id) }}"
+                                            <form action="{{ route('roles.destroy', $role->id) }}"
                                                 method="POST" class="inline-block"
                                                 onsubmit="return confirm('Are you sure you want to delete this permission?');">
                                                 @csrf
@@ -53,7 +68,7 @@
                                                     class="px-3 py-1 bg-red-600 text-white rounded-md text-sm hover:bg-red-700">
                                                     Delete
                                                 </button>
-                                            </form> --}}
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty

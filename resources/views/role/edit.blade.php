@@ -10,26 +10,44 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <h3 class="text-lg font-bold mb-6">Add New Permission</h3>
+                    <h3 class="text-lg font-bold mb-6">Update Role</h3>
 
-                  <form action="{{ route('permissions.update', $permission->id) }}" method="POST" class="space-y-6">
-    @csrf
-    @method('PUT')
+                    <form action="{{ route('roles.update', $role->id) }}" method="POST" class="space-y-6">
+                        @csrf
+                        @method('PUT')
 
                         <!-- Permission Name -->
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700">Permission
+                            <label for="name" class="block text-sm font-medium text-gray-700">Role
                                 Name</label>
-                            <input type="text" name="name" id="name"
-                                value="{{ old('name', $permission->name) }}"
+                            <input type="text" name="name" id="name" value="{{ old('name', $role->name) }}"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
-                                focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-                                @error('name') border-red-500 @enderror"
+                focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                @error('name') border-red-500 @enderror"
                                 placeholder="Enter permission name">
                             @error('name')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="grid grid-cols-4 gap-4">
+                            @if ($permissions->isNotEmpty())
+                                @foreach ($permissions as $permission)
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" name="permission[]" id="permission-{{ $permission->id }}"
+                                            value="{{ $permission->name }}"
+                                            {{ $hasPermissions->contains($permission->name) ? 'checked' : '' }}
+                                            class="mr-2">
+                                        <label for="permission-{{ $permission->id }}" class="text-gray-700">
+                                            {{ $permission->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @else
+                                <p class="text-gray-500 col-span-4">No permissions available.</p>
+                            @endif
+                        </div>
+
+
 
                         <!-- Submit Button -->
                         <div>
