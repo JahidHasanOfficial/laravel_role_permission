@@ -10,9 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <h3 class="text-lg font-bold mb-6">Add New Permission</h3>
+                    <h3 class="text-lg font-bold mb-6">Add New Role</h3>
 
-                    <form action="{{ route('role.store') }}" method="POST" class="space-y-6">
+                    <form action="{{ route('roles.store') }}" method="POST" class="space-y-6">
                         @csrf
 
                         <!-- Permission Name -->
@@ -29,17 +29,22 @@
                             @enderror
                         </div>
 
-                        <div class="grid grid-cols-4">
-                            @if($permissions->isNotEmpty())
-                                @foreach($permissions as $permission)
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="permission[]" id="permissions" value="{{ $permission->id }}" class="mr-2">
-                                        <label for="permission" class="text-gray-700">{{ $permission->name }}</label>
+                        <div class="grid grid-cols-4 gap-4">
+                            @if ($permissions->isNotEmpty())
+                                @foreach ($permissions as $permission)
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" name="permission[]" id="permission-{{ $permission->id }}"
+                                            value="{{ $permission->name }}" class="mr-2">
+                                        <label for="permission-{{ $permission->id }}" class="text-gray-700">
+                                            {{ $permission->name }}
+                                        </label>
                                     </div>
                                 @endforeach
+                            @else
+                                <p class="text-gray-500 col-span-4">No permissions available.</p>
                             @endif
-
                         </div>
+
 
                         <!-- Submit Button -->
                         <div>
