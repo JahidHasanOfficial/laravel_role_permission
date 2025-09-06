@@ -5,9 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class PostController extends Controller
+class PostController extends Controller implements HasMiddleware
 {
+
+
+    public static function middleware() : array
+    {
+        return [
+             new Middleware('permission:view posts', only: ['index']),
+            new Middleware('permission:create posts', only: ['create']),
+            new Middleware('permission:update posts', only: ['edit']),
+            new Middleware('permission:delete posts', only: ['destroy']),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */

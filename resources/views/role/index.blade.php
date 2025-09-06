@@ -21,7 +21,9 @@
                     <div class="overflow-x-auto">
                         <div class="flex justify-between mb-4">
                             <h1>All Roles</h1>
-                            <a href="{{ route('roles.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Role</a>
+                           @can('create roles')
+                                <a href="{{ route('roles.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Role</a>
+                           @endcan
                         </div>
                         <table class="min-w-full divide-y divide-gray-200 border border-gray-200">
                             <thead class="bg-gray-100">
@@ -30,7 +32,9 @@
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Name</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Permission</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Created At</th>
-                                    <th class="px-4 py-2 text-center text-sm font-semibold text-gray-600">Action</th>
+                                   @can('edit roles', 'delete roles')
+                                        <th class="px-4 py-2 text-center text-sm font-semibold text-gray-600">Action</th>
+                                   @endcan
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -55,19 +59,23 @@
                                         <td class="px-4 py-2 text-sm text-gray-500">
                                             {{ $role->created_at->format('d M, Y') }}</td>
                                         <td class="px-4 py-2 text-center space-x-2">
-                                            <a href="{{ route('roles.edit', $role->id) }}"
+                                           @can('edit roles')
+                                                <a href="{{ route('roles.edit', $role->id) }}"
                                                 class="px-3 py-1 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700">
                                                 Edit
                                             </a>
+                                           @endcan
                                             <form action="{{ route('roles.destroy', $role->id) }}"
                                                 method="POST" class="inline-block"
                                                 onsubmit="return confirm('Are you sure you want to delete this permission?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit"
+                                                @can('delete roles')
+                                                    <button type="submit"
                                                     class="px-3 py-1 bg-red-600 text-white rounded-md text-sm hover:bg-red-700">
                                                     Delete
                                                 </button>
+                                                @endcan
                                             </form>
                                         </td>
                                     </tr>
