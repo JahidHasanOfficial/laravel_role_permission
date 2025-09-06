@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermissionController;
@@ -33,6 +34,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/role/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
     Route::put('/role/{id}', [RoleController::class, 'update'])->name('roles.update');
     Route::delete('/role/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
+
+    //Posts
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
+    Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
     
 });
 
