@@ -44,6 +44,33 @@
                             @enderror
                         </div>
 
+                        <!-- Password -->
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <input type="password" name="password" id="password" value="{{ old('password') }}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                @error('password') border-red-500 @enderror"
+                                placeholder="Enter Password">
+                            @error('password')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div>
+                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm
+                                Password</label>
+                            <input type="password" name="confirm_password" id="password_confirmation" value="{{ old('password') }}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm
+                focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                @error('confirm_password') border-red-500 @enderror"
+                                placeholder="Enter Password">
+                            @error('confirm_password')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>  
+
                         <!-- Role -->
                         <div class="grid grid-cols-4 gap-4">
                             @if ($roles->isNotEmpty())

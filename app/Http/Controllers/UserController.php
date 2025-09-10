@@ -105,6 +105,8 @@ class UserController extends Controller // implements HasMiddleware
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:users,name,'.$id.',id',
             'email' => 'required|email|unique:users,email,'.$id.',id',
+            'password' => 'nullable|same:confirm_password',
+            'confirm_password' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -113,6 +115,8 @@ class UserController extends Controller // implements HasMiddleware
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        
         $user->save();
 
         $user->syncRoles($request->role);
