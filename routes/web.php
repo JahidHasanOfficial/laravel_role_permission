@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
@@ -51,6 +52,23 @@ Route::middleware('auth')->group(function () {
    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+   //Divisions
+   Route::get('/divisions', [DivisionController::class, 'index'])->name('divisions.index');
+   Route::get('/divisions/create', [DivisionController::class, 'create'])->name('divisions.create');
+   Route::post('/divisions', [DivisionController::class, 'store'])->name('divisions.store');
+   Route::get('/divisions/{id}/edit', [DivisionController::class, 'edit'])->name('divisions.edit');
+   Route::put('/divisions/{id}', [DivisionController::class, 'update'])->name('divisions.update');
+   Route::delete('/divisions/{id}', [DivisionController::class, 'destroy'])->name('divisions.destroy');
+
+
+
+
+
+
+
+
+
 });
 
 require __DIR__.'/auth.php';
