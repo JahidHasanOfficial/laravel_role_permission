@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller // implements HasMiddleware
 {
@@ -40,7 +41,8 @@ class UserController extends Controller // implements HasMiddleware
      */
     public function create()
     {
-        //
+        $roles = Role::orderBy('id', 'DESC')->get();
+        return view('user.create', compact('roles'));
     }
 
     /**
@@ -48,7 +50,29 @@ class UserController extends Controller // implements HasMiddleware
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users|min:3|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|same:confirm_password',
+            'confirm_password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+
+        ]);
+
+
+
+        $user->syncRoles($request->role);
+
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
 
     /**
