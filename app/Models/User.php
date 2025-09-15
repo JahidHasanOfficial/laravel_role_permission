@@ -25,6 +25,20 @@ class User extends Authenticatable
         'confirm_password'
     ];
 
+
+public function districts()
+{
+    return $this->belongsToMany(District::class, 'user_district');
+}
+
+
+
+ public function divisions()
+    {
+        return $this->hasManyThrough(Division::class, District::class, 'id', 'id', 'districts.id', 'division_id');
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

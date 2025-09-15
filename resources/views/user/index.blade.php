@@ -30,6 +30,8 @@
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Name</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Email</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Role</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">District/Division</th>
+                                    {{-- <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">District</th> --}}
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Created At</th>
                                     <th class="px-4 py-2 text-center text-sm font-semibold text-gray-600">Action</th>
                                 </tr>
@@ -55,6 +57,24 @@
         <span class="text-gray-400 italic">No role assigned</span>
     @endif
 </td>
+
+<td class="px-4 py-2 text-sm text-gray-700">
+    @if($user->districts->isNotEmpty())
+        <div class="flex flex-wrap gap-2">
+            @foreach($user->districts as $district)
+                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
+                    {{ $district->name }} 
+                    @if($district->division)
+                        ({{ $district->division->name }})
+                    @endif
+                </span>
+            @endforeach
+        </div>
+    @else
+        <span class="text-gray-400 italic">No district assigned</span>
+    @endif
+</td>
+
 
 
                                         <td class="px-4 py-2 text-sm text-gray-500">

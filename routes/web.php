@@ -69,6 +69,8 @@ Route::middleware('auth')->group(function () {
    Route::get('/districts/{id}/edit', [DistrictController::class, 'edit'])->name('districts.edit');
    Route::put('/districts/{id}', [DistrictController::class, 'update'])->name('districts.update');
    Route::delete('/districts/{id}', [DistrictController::class, 'destroy'])->name('districts.destroy');
+   Route::get('/districts-by-division/{division}', [UserController::class, 'districtsByDivision']);
+
 
 
 

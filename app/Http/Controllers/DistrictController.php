@@ -7,10 +7,10 @@ use App\Models\Division;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\HasMiddleware;       
 
 
-class DistrictController extends Controller //implements HasMiddleware
+class DistrictController extends Controller implements HasMiddleware
 {
      public static function middleware(): array
     {

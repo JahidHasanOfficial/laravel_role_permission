@@ -18,4 +18,13 @@ class District extends Model
     {
         return $this->belongsTo(Division::class);
     }
+
+   public function users()
+{
+    return $this->belongsToMany(User::class, 'user_district');
+}
+
+
+
+
 }

@@ -89,6 +89,44 @@
                                 <p class="text-gray-500 col-span-4">No permissions available.</p>
                             @endif
                         </div>
+<!-- Division Select -->
+<select name="division_id" id="division" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+    <option value="">Select Division</option>
+    @foreach($divisions as $division)
+        <option value="{{ $division->id }}" {{ $division->id == $selectedDivisionId ? 'selected' : '' }}>
+            {{ $division->name }}
+        </option>
+    @endforeach
+</select>
+
+<!-- District Checkboxes -->
+<div id="district-checkboxes">
+    @if($selectedDivisionId)
+        @foreach(\App\Models\District::where('division_id', $selectedDivisionId)->get() as $district)
+            <div class="flex items-center space-x-2">
+                <input type="checkbox" name="district_id[]" id="district-{{ $district->id }}" value="{{ $district->id }}"
+                    {{ in_array($district->id, $hasDistricts) ? 'checked' : '' }}>
+                <label for="district-{{ $district->id }}">{{ $district->name }}</label>
+            </div>
+        @endforeach
+    @endif
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$('#division').on('change', function() {
+    var division_id = $(this).val();
+    if(division_id){
+        $.get('/districts-by-division/'+division_id, function(data){
+            $('#district-checkboxes').html(data); // HTML replace
+        });
+    } else {
+        $('#district-checkboxes').html('');
+    }
+});
+</script>
+
 
 
 
