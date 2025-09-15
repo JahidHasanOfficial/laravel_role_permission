@@ -21,13 +21,16 @@
                     <div class="overflow-x-auto">
                         <div class="flex justify-between mb-4">
                             <h1>All Divisions</h1>
-                            <a href="{{ route('divisions.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Division</a>
+                            <a href="{{ route('divisions.create') }}"
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create
+                                Division</a>
                         </div>
                         <table class="min-w-full divide-y divide-gray-200 border border-gray-200">
                             <thead class="bg-gray-100">
                                 <tr>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">#</th>
-                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Division Name</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Division Name
+                                    </th>
                                     <th class="px-4 py-2 text-center text-sm font-semibold text-gray-600">Action</th>
                                 </tr>
                             </thead>
@@ -36,7 +39,7 @@
                                     <tr>
                                         <td class="px-4 py-2 text-sm text-gray-700">{{ $key + 1 }}</td>
                                         <td class="px-4 py-2 text-sm text-gray-700">{{ $division->name }}</td>
-                                    
+
                                         <td class="px-4 py-2 text-center space-x-2">
                                             <a href="{{ route('divisions.edit', $division->id) }}"
                                                 class="px-3 py-1 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700">

@@ -10,10 +10,10 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 
 class DivisionController extends Controller implements HasMiddleware
 {
-     public static function middleware() : array
+    public static function middleware(): array
     {
         return [
-             new Middleware('permission:view posts', only: ['index']),
+            new Middleware('permission:view posts', only: ['index']),
             new Middleware('permission:create posts', only: ['create']),
             new Middleware('permission:update posts', only: ['edit']),
             new Middleware('permission:delete posts', only: ['destroy']),
@@ -70,7 +70,7 @@ class DivisionController extends Controller implements HasMiddleware
      */
     public function edit(string $id)
     {
-         $division = Division::findOrFail($id);
+        $division = Division::findOrFail($id);
         return view('backend.division.edit', compact('division'));
     }
 
@@ -90,7 +90,7 @@ class DivisionController extends Controller implements HasMiddleware
             return redirect()->route('divisions.index')->with('success', 'Division updated successfully');
         } else {
             return redirect()->route('divisions.edit', $id)->withInput()->withErrors($validator);
-        }   
+        }
     }
 
     /**

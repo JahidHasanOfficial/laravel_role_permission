@@ -61,6 +61,14 @@ Route::middleware('auth')->group(function () {
    Route::put('/divisions/{id}', [DivisionController::class, 'update'])->name('divisions.update');
    Route::delete('/divisions/{id}', [DivisionController::class, 'destroy'])->name('divisions.destroy');
 
+   // Districts 
+   Route::get('/districts', [DistrictController::class, 'index'])->name('districts.index');
+   Route::get('/districts/create', [DistrictController::class, 'create'])->name('districts.create');
+   Route::post('/districts', [DistrictController::class, 'store'])->name('districts.store');
+   Route::get('/districts/{id}/edit', [DistrictController::class, 'edit'])->name('districts.edit');
+   Route::put('/districts/{id}', [DistrictController::class, 'update'])->name('districts.update');
+   Route::delete('/districts/{id}', [DistrictController::class, 'destroy'])->name('districts.destroy');
+
 
 
 
