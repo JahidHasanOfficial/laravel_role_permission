@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\PermissionController;
@@ -53,6 +54,9 @@ Route::middleware('auth')->group(function () {
    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+//    user status
+Route::post('/users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('users.toggleStatus');
+
 
    //Divisions
    Route::get('/divisions', [DivisionController::class, 'index'])->name('divisions.index');
@@ -71,6 +75,15 @@ Route::middleware('auth')->group(function () {
    Route::delete('/districts/{id}', [DistrictController::class, 'destroy'])->name('districts.destroy');
    Route::get('/districts-by-division/{division}', [UserController::class, 'districtsByDivision']);
 
+   // Trainers
+//    Route::get('/trainers', [TrainerController::class, 'index'])->name('trainers.index');
+//    Route::get('/trainers/create', [TrainerController::class, 'create'])->name('trainers.create');
+//    Route::post('/trainers', [TrainerController::class, 'store'])->name('trainers.store');
+//    Route::get('/trainers/{id}/edit', [TrainerController::class, 'edit'])->name('trainers.edit');
+//    Route::put('/trainers/{id}', [TrainerController::class, 'update'])->name('trainers.update');
+//    Route::delete('/trainers/{id}', [TrainerController::class, 'destroy'])->name('trainers.destroy');
+
+    Route::resource('trainers', TrainerController::class);
 
 
 

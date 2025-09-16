@@ -93,7 +93,7 @@ public function store(Request $request)
         'email' => 'required|email|unique:users',
         'password' => 'required|same:confirm_password',
         'confirm_password' => 'required',
-        'district_id' => 'required|array|min:1',
+        'district_id' => 'nullable|array',
     ]);
 
     if ($validator->fails()) {
@@ -116,6 +116,21 @@ public function store(Request $request)
 
     return redirect()->route('users.index')->with('success', 'User created successfully.');
 }
+
+public function toggleStatus($id)
+{
+    $user = User::findOrFail($id);
+    $user->status = !$user->status; // 1 <-> 0
+    $user->save();
+
+    return response()->json([
+        'status' => $user->status,
+        'message' => $user->status ? 'User is now Active' : 'User is now Inactive'
+    ]);
+}
+
+
+
 
 
 
