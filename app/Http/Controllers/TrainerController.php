@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trainer;
+use App\Helpers\ImageHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,17 +35,28 @@ class TrainerController extends Controller
         'name'  => 'required|string|max:255',
         'email' => 'nullable|email|unique:trainers,email',
         'phone' => 'nullable|string|max:20',
+        'image' => 'nullable|image|max:2048', // Optional image upload
     ]);
 
     $trainer = new Trainer();
     $trainer->name  = $request->name;
     $trainer->email = $request->email;
     $trainer->phone = $request->phone;
+    $trainer->image = $request->image;
 
-    // user er district auto nibe
+    //  $path = null;
+    //     if ($request->hasFile('image')) {
+    //         $path = ImageHelper::upload($request->file('image'), 'trainers');
+    //     }
+    //     $trainer->image = $path;
+        if ($request->hasFile('image')) {
+            $trainer->image = ImageHelper::upload($request->file('image'), 'trainers');
+        } else {
+            $trainer->image = null; 
+        }
+
     $trainer->district_id = Auth::user()->districts->first()->id ?? null;
 
-    // কে create করছে সেটাও save হবে
     $trainer->created_by = Auth::id();
 
     $trainer->save();

@@ -11,11 +11,11 @@
                 <div class="p-6 text-gray-900">
 
                     <!-- Success Message -->
-                    @if (session('success'))
+                    {{-- @if (session('success'))
                         <div class="mb-4 p-4 text-green-700 bg-green-100 rounded-md">
                             {{ session('success') }}
                         </div>
-                    @endif
+                    @endif --}}
 
                     <!-- Permission Table -->
                     <div class="overflow-x-auto">

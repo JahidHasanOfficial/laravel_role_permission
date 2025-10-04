@@ -40,6 +40,7 @@
                                         <td class="px-4 py-2 text-sm text-gray-700">{{ $key + 1 }}</td>
                                         <td class="px-4 py-2 text-sm text-gray-700">{{ $data->division->name }}</td>
                                         <td class="px-4 py-2 text-sm text-gray-700">{{ $data->name }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700">{{ $data->name }}</td>
 
                                         <td class="px-4 py-2 text-center space-x-2">
                                             <a href="{{ route('districts.edit', $data->id) }}"

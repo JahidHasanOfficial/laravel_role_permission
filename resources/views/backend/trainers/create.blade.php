@@ -7,7 +7,7 @@
 
     <div class="py-6">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <form action="{{ route('trainers.store') }}" method="POST" class="space-y-4">
+            <form action="{{ route('trainers.store') }}" method="POST" class="space-y-4" enctype="multipart/form-data">
                 @csrf
                 <div>
                     <label class="block">Name</label>
@@ -21,6 +21,12 @@
                     <label class="block">Phone</label>
                     <input type="text" name="phone" class="w-full border p-2 rounded">
                 </div>
+                {{-- image --}}
+                <div> 
+                     <label class="block">Image</label>
+                    <input type="file" name="image" class="w-full border p-2 rounded">
+                </div>
+                  
                 <button class="bg-green-500 text-white px-4 py-2 rounded">Save</button>
             </form>
         </div>

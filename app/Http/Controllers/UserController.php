@@ -12,19 +12,19 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
-class UserController extends Controller implements HasMiddleware
+class UserController extends Controller
 {
 
 
-    public static function middleware() : array
-    {
-        return [
-             new Middleware('permission:view users', only: ['index']),
-             new Middleware('permission:create users', only: ['create']),
-            new Middleware('permission:update users', only: ['edit']),
-             new Middleware('permission:delete users', only: ['destroy']),
-        ];
-    }
+    // public static function middleware() : array
+    // {
+    //     return [
+    //          new Middleware('permission:view users', only: ['index']),
+    //          new Middleware('permission:create users', only: ['create']),
+    //         new Middleware('permission:update users', only: ['edit']),
+    //          new Middleware('permission:delete users', only: ['destroy']),
+    //     ];
+    // }
 
 
     /**

@@ -11,7 +11,7 @@ class Trainer extends Model
     use HasFactory;
 
      
-    protected $fillable = ['name','email','phone','district_id','created_by'];
+    protected $fillable = ['name','email','phone','district_id','created_by, image'];
 
    public function district()
 {

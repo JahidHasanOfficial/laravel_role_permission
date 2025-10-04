@@ -32,7 +32,7 @@
                         <th class="px-4 py-2">Name</th>
                         <th class="px-4 py-2">Email</th>
                         <th class="px-4 py-2">Phone</th>
-                       
+                       <th class="px-4 py-2">Image</th>
                         <th class="px-4 py-2">Action</th>
                     </tr>
                 </thead>
@@ -49,6 +49,15 @@
                             <td class="px-4 py-2">{{ $trainer->name }}</td>
                             <td class="px-4 py-2">{{ $trainer->email }}</td>
                             <td class="px-4 py-2">{{ $trainer->phone }}</td>
+                            <td class="px-4 py-2">
+                            
+                        <img src="{{ App\Helpers\ImageHelper::get($trainer->image) }}" alt="Trainer Image" class="w-16 h-16 object-cover rounded">
+
+
+
+
+                
+                            </td>
                             
                             <td class="px-4 py-2 space-x-2">
                                 <a href="{{ route('trainers.edit',$trainer->id) }}"
