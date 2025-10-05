@@ -70,6 +70,10 @@
                     @endforelse
                 </tbody>
             </table>
+            {{-- ✅ Pagination Links --}}
+<div class="mt-4">
+    {{ $trainers->links() }}
+</div>
         </div>
     </div>
 </x-app-layout>

@@ -17,7 +17,7 @@ class TrainerController extends Controller
             $query->where('created_by', Auth::id());
         }
 
-        $trainers = $query->latest()->get();
+        $trainers = $query->latest()->paginate(config('pagination.per_page'));;
 
         return view('backend.trainers.index', compact('trainers'));
     }
