@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Trainer extends Model
+class Employee extends Model
 {
-    /** @use HasFactory<\Database\Factories\TrainerFactory> */
+    /** @use HasFactory<\Database\Factories\EmployeeFactory> */
     use HasFactory;
-
-     
-    protected $fillable = ['name','email','phone','district_id','created_by, image'];
+    protected $fillable = ['name', 'address', 'email','phone','district_id','created_by, image'];
 
    public function district()
 {

@@ -4,10 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StuffController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
@@ -84,6 +86,8 @@ Route::post('/users/{user}/toggle-status', [UserController::class, 'toggleStatus
 //    Route::delete('/trainers/{id}', [TrainerController::class, 'destroy'])->name('trainers.destroy');
 
     Route::resource('trainers', TrainerController::class);
+    Route::resource('stuff', StuffController::class);
+    Route::resource('employees', EmployeeController::class);
 
 
 

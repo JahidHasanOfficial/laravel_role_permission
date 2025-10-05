@@ -1,0 +1,38 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Create Stuff') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-6">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <form action="{{ route('stuff.store') }}" method="POST" class="space-y-4" enctype="multipart/form-data">
+                @csrf
+                <div>
+                    <label class="block">Name</label>
+                    <input type="text" name="name" class="w-full border p-2 rounded" required>
+                </div>
+                <div>
+                    <label class="block">Email</label>
+                    <input type="email" name="email" class="w-full border p-2 rounded">
+                </div>
+                <div>
+                    <label class="block">Phone</label>
+                    <input type="text" name="phone" class="w-full border p-2 rounded">
+                </div>
+                <div>
+                    <label class="block">Address</label>
+                    <input type="text" name="address" class="w-full border p-2 rounded">
+                </div>
+                {{-- image --}}
+                <div> 
+                     <label class="block">Image</label>
+                    <input type="file" name="image" class="w-full border p-2 rounded">
+                </div>
+                  
+                <button class="bg-green-500 text-white px-4 py-2 rounded">Save</button>
+            </form>
+        </div>
+    </div>
+</x-app-layout>
