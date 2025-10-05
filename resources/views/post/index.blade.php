@@ -29,6 +29,7 @@
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">#</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Title</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Author</th>
+                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Image</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Created At</th>
                                     <th class="px-4 py-2 text-center text-sm font-semibold text-gray-600">Action</th>
                                 </tr>
@@ -39,6 +40,7 @@
                                         <td class="px-4 py-2 text-sm text-gray-700">{{ $key + 1 }}</td>
                                         <td class="px-4 py-2 text-sm text-gray-700">{{ $post->author }}</td>
                                         <td class="px-4 py-2 text-sm text-gray-700">{{ $post->title }}</td>
+                                           <td class="px-4 py-2"><img src="{{ App\Helpers\ImageHelper::get($post->image) }}" alt="Trainer Image" class="w-16 h-16 object-cover rounded"></td>
                                         <td class="px-4 py-2 text-sm text-gray-500">
                                             {{ $post->created_at->format('d M, Y') }}</td>
                                         <td class="px-4 py-2 text-center space-x-2">

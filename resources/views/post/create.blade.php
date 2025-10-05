@@ -12,7 +12,7 @@
 
                     <h3 class="text-lg font-bold mb-6">Add New Permission</h3>
 
-                    <form action="{{ route('posts.store') }}" method="POST" class="space-y-6">
+                    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                         @csrf
 
                         <!--  Name -->
@@ -56,6 +56,12 @@
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
+
+                          {{-- image --}}
+                <div> 
+                     <label class="block">Image</label>
+                    <input type="file" name="image" class="w-full border p-2 rounded">
+                </div>
 
                         <!-- Submit Button -->
                         <div>

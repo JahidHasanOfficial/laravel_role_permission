@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Helpers\ImageHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controllers\Middleware;
@@ -48,14 +49,22 @@ class PostController extends Controller implements HasMiddleware
             'title' => 'required|unique:posts|min:3|max:255',
             'description' => 'required',
             'author' => 'required',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         if ($validator->passes()) {
-            Post::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'author' => $request->author,
-            ]);
+            $post = new Post();
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->author = $request->author;
+          
+            if ($request->hasFile('image')) {
+                $post->image = ImageHelper::upload($request->file('image'), 'posts');
+                $post->save();
+            } else {
+                $post->image = null;
+            }
+            $post->save();
 
             return redirect()->route('posts.index')->with('success', 'Post created successfully');
         } else {
@@ -96,6 +105,9 @@ class PostController extends Controller implements HasMiddleware
             $post->title = $request->title;
             $post->description = $request->description;
             $post->author = $request->author;
+            if ($request->hasFile('image')) {
+                $post->image = ImageHelper::update($request->file('image'), $post->image, 'posts');
+            }
             $post->save();
             return redirect()->route('posts.index')->with('success', 'Post updated successfully');
         } else {
@@ -109,6 +121,8 @@ class PostController extends Controller implements HasMiddleware
     public function destroy(string $id)
     {
         $post = Post::findOrFail($id);
+        // Delete associated image
+        ImageHelper::delete($post->image);
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
     }

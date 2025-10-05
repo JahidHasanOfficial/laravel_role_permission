@@ -12,7 +12,7 @@
 
                     <h3 class="text-lg font-bold mb-6">Add New Permission</h3>
 
-                  <form action="{{ route('posts.update', $post->id) }}" method="POST" class="space-y-6">
+                  <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
     @csrf
     @method('PUT')
 
@@ -26,7 +26,7 @@
                 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
                 @error('title') border-red-500 @enderror"
                                 placeholder="Enter Post Title">
-                            @error('title')
+                            @error('title')r
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
@@ -58,6 +58,14 @@
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
+
+                         <div>
+                    <label class="block">Image</label>
+                    <input type="file" name="image" class="w-full border p-2 rounded">
+                    @if($post->image)
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="Trainer Image" class="mt-2 h-20 w-20 object-cover">
+                    @endif  
+                </div>
 
                         <!-- Submit Button -->
                         <div>
